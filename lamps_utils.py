@@ -160,7 +160,11 @@ def initialize_vgg_model( path ):
 
 def download                ( url, file, caption ):
     urllib3.disable_warnings( urllib3.exceptions.InsecureRequestWarning )
-    http                    = urllib3.PoolManager( cert_reqs = "CERT_NONE", assert_hostname = False )
+    if ( url[0:5] == "https" ):
+        http                = urllib3.PoolManager( cert_reqs = "CERT_NONE", assert_hostname = False )
+    else:
+        http                = urllib3.PoolManager( )
+
     response                = http.request( "GET", url, preload_content=False )
     file_size               = int( response.headers.get( "Content-Length" ) )
 
