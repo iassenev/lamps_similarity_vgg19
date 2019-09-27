@@ -124,7 +124,7 @@ def initialize_vgg_model( path ):
         """
         Return the AveragePooling layer.
         """
-        return tf.nn.avg_pool(prev_layer, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='SAME')
+        return tf.nn.avg_pool2d(prev_layer, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='SAME')
 
     # Constructs the graph model.
     graph                       = { }
