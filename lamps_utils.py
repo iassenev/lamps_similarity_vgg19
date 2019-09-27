@@ -7,14 +7,11 @@ print                   ( "initializing pathlib, urllib3, progressbar, scipy.io,
 
 from pathlib import Path
 import urllib3
-import urllib3.contrib.pyopenssl
 import progressbar
 import scipy.io
 import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf
-
-urllib3.contrib.pyopenssl.inject_into_urllib3( )
 
 #-----------------------------------------------------------------------------------------------------------------------
 # class CONFIG as a properties holder
