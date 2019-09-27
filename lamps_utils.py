@@ -3,7 +3,10 @@
 #   Description:    Lamps distance generator on top of VGG-19 model
 #-----------------------------------------------------------------------------------------------------------------------
 
-print                   ( "initializing pathlib, urllib3, progressbar, scipy.io, imageio, skimage.transform, matplotlib.pyplot, numpy and tensorflow" )
+print                   ( "initializing warnings, pathlib, urllib3, progressbar, scipy.io, imageio, skimage.transform, matplotlib.pyplot, numpy and tensorflow" )
+
+import warnings
+warnings.filterwarnings('ignore',category=FutureWarning)
 
 from pathlib import Path
 import urllib3
