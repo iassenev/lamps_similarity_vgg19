@@ -3,12 +3,14 @@
 #   Description:    Lamps distance generator on top of VGG-19 model
 #-----------------------------------------------------------------------------------------------------------------------
 
-print                   ( "initializing pathlib, urllib3, progressbar, scipy.io, matplotlib.pyplot, numpy and tensorflow" )
+print                   ( "initializing pathlib, urllib3, progressbar, scipy.io, imageio, skimage.transform, matplotlib.pyplot, numpy and tensorflow" )
 
 from pathlib import Path
 import urllib3
 import progressbar
 import scipy.io
+import imageio
+import skimage.transform
 import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf
@@ -222,7 +224,7 @@ def initialize_images_database( images_folder, urls ):
 def set_input                   ( image, model, session ):
     # Reshape image to mach expected input of VGG-19
     # consider to use another algorithm for resizing
-    image                       = scipy.misc.imresize( image, (300, 400) )
+    image                       = skimage.transform.resize( image, (300, 400) )
 
     # Substract the mean to match the expected input of VGG-19
     image                       = image - CONFIG.MEANS
@@ -255,7 +257,7 @@ def encoding_file_name( image_path, layer ):
 # returns a loaded image in the CONFIG.IMAGES_FOLDER with the specified name
 #-----------------------------------------------------------------------------------------------------------------------
 def new_image( name ):
-    return                      scipy.misc.imread( name )
+    return                      imageio.imread( name )
 
 g_encodings_layer               = ""
 g_encodings                     = { }
@@ -316,7 +318,7 @@ def add_output_image            ( figure, image, index ):
     show_image                  ( image )
 
 def show_similar                ( image, encodings_layer, model, images_file_names, images_database_version ):
-    session                     = tf.InteractiveSession( )
+    session                     = tf.compat.v1.InteractiveSession( )
 
     encodings                   = layer_encodings( images_database_version, images_file_names, encodings_layer, model, session )
 
